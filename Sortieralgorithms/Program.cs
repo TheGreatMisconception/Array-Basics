@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
+using System.Runtime.ConstrainedExecution;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -22,6 +24,8 @@ namespace Sortierungsalgorithmen
             }
             return array;
         }
+
+        // return a array with hardcoded length 
         private static void Variante1()
         {
             int[] array = new int[10];
@@ -35,9 +39,12 @@ namespace Sortierungsalgorithmen
             {
                 Console.WriteLine($"Index {i} : {array[i]}");
             }
+            Console.WriteLine("\nPress any key to exit...");
             Console.ReadKey();
+            Console.Clear();
         }
 
+        // Create and return a filled array with random numbers
         private static void Variante2()
         {
             int Min;
@@ -55,7 +62,9 @@ namespace Sortierungsalgorithmen
             {
                 Console.WriteLine($"Index {i} : {array[i]}");
             }
+            Console.WriteLine("\nPress any key to exit...");
             Console.ReadKey();
+            Console.Clear();
         }
 
 
@@ -72,14 +81,22 @@ namespace Sortierungsalgorithmen
             return true;
         }
 
-        private static int[] CreateArrayLength()
+        private static int[] CreateArrayLength(string Variante)
         {
+
+            // Nonsense
+            string username;
+            string hostname;
+            username = Environment.UserName;
+            hostname = System.Environment.GetEnvironmentVariable("COMPUTERNAME");
+
             string Length;
             Length = "#";
             while (!CanConvert(Length))
             {
-                Console.Write("Array Length: ");
+                Console.Write($"{username}@{hostname}:~/{Variante}# ./{Variante} --start\nStarting {Variante}\n\nEnter Array Length:");
                 Length = Console.ReadLine();
+                Console.Clear();
             }
             int[] Array;
             Array = new int[Convert.ToInt32(Length)];
@@ -95,30 +112,37 @@ namespace Sortierungsalgorithmen
         }
 
 
-        private static void Output(int[] Arr)
+        private static void Output(int[] Arr, bool clear)
         {
             for (int i = 0; i < Arr.Length; i++)
             {
                 Console.WriteLine($"Index {i} : {Arr[i]}");
             }
-            Console.WriteLine("\n--ende");
-        }
+            if (clear) {
+                Console.WriteLine("\nPress any key to exit...");
+                Console.ReadKey();
+                Console.Clear();
+            }
+           }
+
+        // Create and Fill array based on hardcoded length
         private static void Variante3()
         {
             int[] Array;
             Array = CreateArrayLengthHard();
             Array = FillArray(Array);
-            Output(Array);
-            Console.ReadLine();
+            Output(Array, true);
+            Console.Clear();
         }
 
+        // User defined Array Length
         private static void Variante4()
         {
             int[] Array;
-            Array = CreateArrayLength();
+            Array = CreateArrayLength("Variante4");
             Array = FillArray(Array);
-            Output(Array);
-            Console.ReadLine();
+            Output(Array, true);
+            Console.Clear();
         }
 
         // Output a part of a array based on 2 variables minimum index and maximum index.
@@ -130,9 +154,12 @@ namespace Sortierungsalgorithmen
             {
                 Console.WriteLine($"Index {i} : {array[i]}");
             }
+            Console.WriteLine("\nPress any key to exit...");
+            Console.ReadLine();
+            Console.Clear();
         }
 
-
+        // Partreturn of array
         private static void Variante5()
         {
             int sliceMin;
@@ -140,12 +167,12 @@ namespace Sortierungsalgorithmen
             sliceMin = 0; // manual input
             sliceMax = 2; // manual input
             int[] Array;
-            Array = CreateArrayLength();
+            Array = CreateArrayLength("Variante5");
             Array = FillArray(Array);
             OutputValues(Array, sliceMin, sliceMax);
-            Console.ReadLine();
         }
 
+        // Swapping Helper Method
         private static int[] SwapValues(int[] array, int Value1, int Value2)
         {
             int TempValue = array[Value1];
@@ -153,35 +180,205 @@ namespace Sortierungsalgorithmen
             array[Value2] = TempValue;
             return array;
         }
+
+        // Swap Array
         private static void Variante6()
         {
             int[] array;
-            array = CreateArrayLength();
+            array = CreateArrayLength("Variante6");
             array = FillArray(array);
-            Output(array);
+            Console.WriteLine("Before: \n");
+            Output(array, false);
             for (int i = 0; i < array.Length / 2; i++)
             {
-                Console.WriteLine(array.Length - i - 1);
                 array = SwapValues(array, i, array.Length - i - 1);
             }
-            Output(array);
-            Console.ReadLine();
+            Console.WriteLine("\n\nAfter: \n");
+            Output(array, true);
+            Console.Clear();
         }
 
+        // Sorting using builin sorting method
         private static void Variante7()
         {
-            int[] array = CreateArrayLength();
+            int[] array = CreateArrayLength("Variante7");
             array = FillArray(array);
-            Output(array);
+            Output(array, false);
             Array.Sort(array);
-            Output(array);
-            Console.ReadLine();
+            Output(array, true);
+            Console.Clear();
+
+        }
+
+        // BubbleSort Implementation
+        private static void Variante8()
+        {
+            int[] array = CreateArrayLength("Variante8");
+            array = FillArray(array);
+            for (int i = 0; i < array.Length; i++) {
+                for (int y = 0; y < array.Length; y++) { 
+                    // <  - smaller to greater
+                    // >  - greater to smaller
+                    if (array[i] < array[y]) {
+                        // Temp variable in order to swap values
+                        int temp;
+                        temp = array[y];
+                        array[y] = array[i];
+                        array[i] = temp;
+                    }
+                }
+            }
+            Output(array, true);
+            Console.Clear();
+        }
+
+        private static void Variante9() { 
+            // WIP Selectsionsort or InsertionSort
+
+        }
+
+        private static void Variante10()
+        {
+            {
+                int Counter;
+                Counter = 0;
+                int[] array = CreateArrayLength("Variante10");
+                array = FillArray(array);
+                for (int i = 0; i < array.Length; i++)
+                {
+                    for (int y = 0; y < array.Length; y++)
+                    {
+                        // <  - smaller to greater
+                        // >  - greater to smaller
+                        if (array[i] < array[y])
+                        {
+                            // Temp variable in order to swap values
+                            int temp;
+                            temp = array[y];
+                            array[y] = array[i];
+                            array[i] = temp;
+                        }
+                        Counter++;
+                    }
+                }
+                Console.WriteLine($"Iterations: {Counter}\n");
+                Output(array, true);
+                Console.Clear();
+            }
+        }
+
+
+        private static void Menu() {
+            bool InMenu;
+            // Nonsense
+            string username;
+            string hostname;
+            string version, author, name, source;
+            version = "0.2a";
+            author = "The GreatMisconception";
+            name = "Welcome to SortingFun 1000\n";
+            source = "https://github.com/TheGreatMisconception/";
+            username = Environment.UserName;
+            hostname = System.Environment.GetEnvironmentVariable("COMPUTERNAME");
+            // While True Loop variable
+            InMenu = true;
+            string[] commands = {"clear", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "exit", "quit", "help", "display" };
+            string[] Variants = { "Basic Array with 10 Entrys", "Basic Array with 10 Random Entrys", "Basic Arrays with extra method and other length", "Array with user specifed length", "Return only parts of an array", "Swap complete array", "Sorted array with c# built-in algorithm", "Array thats being sorted with bubblesort", "WIP", "sorted array with iteration counter" };
+            string welcomemessage = $"{name}Version: {version}\nAuthor: {author}\nSource: {source}\n\nSee \"help\" for more information\n";
+            Console.WriteLine(welcomemessage);
+            while (InMenu) {
+                string cmd;
+                
+                Console.Write($"{username}@{hostname}: ~#");
+                cmd = Console.ReadLine();
+                switch (cmd) 
+                {
+                    // clears Console
+                    case "clear":
+                        Console.Clear();
+                        break;
+                    // exists programm
+                    case "quit":
+                        InMenu = false;
+                        break;
+                    // exists programm
+                    case "exit":
+                        InMenu = false;
+                        break;
+                    // prints all available commands to console
+                    case "help":
+                        Console.WriteLine("Available Commands: \n");
+                        foreach (string command in commands) { Console.WriteLine(command); }
+                        Console.WriteLine("\n");
+                        break;
+                    case "1":
+                        Console.Clear();
+                        Variante1();
+                        break;
+                    case "2":
+                        Console.Clear();
+                        Variante2();
+                        break;
+                    case "3":
+                        Console.Clear();
+                        Variante3();
+                        break;
+                    case "4":
+                        Console.Clear();
+                        Variante4();
+                        break;
+                    case "5":
+                        Console.Clear();
+                        Variante5();
+                        break;
+                    case "6":
+                        Console.Clear();
+                        Variante6();
+                        break;
+                    case "7":
+                        Console.Clear();
+                        Variante7();
+                        break;
+                    case "8":
+                        Console.Clear();
+                        Variante8();
+                        break;
+                    case "9":
+                        Console.Clear();
+                        Variante9();
+                        break;
+
+                    // Displays about message
+                    case "about":
+                        Console.WriteLine(welcomemessage);
+                        break;
+                    case "":
+                        break;
+
+                    // lists all available variants
+                    case "display":
+                        Console.WriteLine("Available Variants and its description\n");
+                        for (int Description = 0; Description < Variants.Length; Description++)
+                        {
+                            Console.WriteLine($"{Description} {Variants[Description]}");
+                        }
+                        Console.WriteLine("\n");
+                        break;
+                    
+                    // Fallback, if no match
+                    default:
+                        Console.WriteLine($"{cmd}: Command not found");
+                        break;
+
+                }
+            }
 
         }
 
         static void Main(string[] args)
         {
-            Variante7();
+            // Launch Main Menu
+            Menu();
         }
     }
 }
