@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
@@ -118,12 +118,13 @@ namespace Sortierungsalgorithmen
             {
                 Console.WriteLine($"Index {i} : {Arr[i]}");
             }
-            if (clear) {
+            if (clear)
+            {
                 Console.WriteLine("\nPress any key to exit...");
                 Console.ReadKey();
                 Console.Clear();
             }
-           }
+        }
 
         // Create and Fill array based on hardcoded length
         private static void Variante3()
@@ -215,11 +216,14 @@ namespace Sortierungsalgorithmen
         {
             int[] array = CreateArrayLength("Variante8");
             array = FillArray(array);
-            for (int i = 0; i < array.Length; i++) {
-                for (int y = 0; y < array.Length; y++) { 
+            for (int i = 0; i < array.Length; i++)
+            {
+                for (int y = 0; y < array.Length; y++)
+                {
                     // <  - smaller to greater
                     // >  - greater to smaller
-                    if (array[i] < array[y]) {
+                    if (array[i] < array[y])
+                    {
                         // Temp variable in order to swap values
                         int temp;
                         temp = array[y];
@@ -232,9 +236,26 @@ namespace Sortierungsalgorithmen
             Console.Clear();
         }
 
-        private static void Variante9() { 
-            // WIP Selectsionsort or InsertionSort
+        // Selectionsort
+        private static void Variante9()
+        {
+            int[] array = CreateArrayLength("Variante9");
+            array = FillArray(array);
+            int smallest;
+            int temp;
+            for (int i = 0; i < array.Length - 1; i++) {
+                smallest = i;
 
+                for (int y = i+1; y < array.Length; y++) {
+                    if (array[y] < array[smallest]) {
+                        smallest = y;
+                    }
+                }
+                temp = array[smallest];
+                array[smallest] = array[i];
+                array[i] = temp;
+            }
+            Output(array, true);
         }
 
         private static void Variante10()
@@ -268,7 +289,8 @@ namespace Sortierungsalgorithmen
         }
 
 
-        private static void Menu() {
+        private static void Menu()
+        {
             bool InMenu;
             // Nonsense
             string username;
@@ -282,16 +304,17 @@ namespace Sortierungsalgorithmen
             hostname = System.Environment.GetEnvironmentVariable("COMPUTERNAME");
             // While True Loop variable
             InMenu = true;
-            string[] commands = {"clear", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "exit", "quit", "help", "display" };
+            string[] commands = { "clear", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "exit", "quit", "help", "display" };
             string[] Variants = { "Basic Array with 10 Entrys", "Basic Array with 10 Random Entrys", "Basic Arrays with extra method and other length", "Array with user specifed length", "Return only parts of an array", "Swap complete array", "Sorted array with c# built-in algorithm", "Array thats being sorted with bubblesort", "WIP", "sorted array with iteration counter" };
             string welcomemessage = $"{name}Version: {version}\nAuthor: {author}\nSource: {source}\n\nSee \"help\" for more information\n";
             Console.WriteLine(welcomemessage);
-            while (InMenu) {
+            while (InMenu)
+            {
                 string cmd;
-                
+
                 Console.Write($"{username}@{hostname}: ~#");
                 cmd = Console.ReadLine();
-                switch (cmd) 
+                switch (cmd)
                 {
                     // clears Console
                     case "clear":
@@ -364,7 +387,7 @@ namespace Sortierungsalgorithmen
                         }
                         Console.WriteLine("\n");
                         break;
-                    
+
                     // Fallback, if no match
                     default:
                         Console.WriteLine($"{cmd}: Command not found");
