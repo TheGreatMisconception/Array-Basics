@@ -10,6 +10,7 @@ namespace Sortierungsalgorithmen
 {
     class Program
     {
+        // Fills an Array with random numbers
         private static int[] FillArray(int[] array)
         {
             int Min;
@@ -25,7 +26,7 @@ namespace Sortierungsalgorithmen
             return array;
         }
 
-        // return a array with hardcoded length 
+        // Return a array with hardcoded length 
         private static void Variante1()
         {
             int[] array = new int[10];
@@ -67,7 +68,7 @@ namespace Sortierungsalgorithmen
             Console.Clear();
         }
 
-
+        // Check if a given string can be converted to an Integer
         private static bool CanConvert(string num)
         {
             try
@@ -81,6 +82,7 @@ namespace Sortierungsalgorithmen
             return true;
         }
 
+        // Method to create an array based on user input
         private static int[] CreateArrayLength(string Variante)
         {
 
@@ -103,6 +105,7 @@ namespace Sortierungsalgorithmen
             return Array;
         }
 
+        // Create a Array with hardcoded values
         private static int[] CreateArrayLengthHard()
         {
             int Length = 5;
@@ -111,7 +114,7 @@ namespace Sortierungsalgorithmen
             return Array;
         }
 
-
+        // Output the Array
         private static void Output(int[] Arr, bool clear)
         {
             for (int i = 0; i < Arr.Length; i++)
@@ -136,7 +139,7 @@ namespace Sortierungsalgorithmen
             Console.Clear();
         }
 
-        // User defined Array Length
+        // User defined Array-length
         private static void Variante4()
         {
             int[] Array;
@@ -146,8 +149,8 @@ namespace Sortierungsalgorithmen
             Console.Clear();
         }
 
-        // Output a part of a array based on 2 variables minimum index and maximum index.
-        // As of now, its not possible to output multiple values that are not logically following each other in a array
+        // Output a part of an Array based on 2 variables: minimum index and maximum index.
+        // As of now, it's not possible to output multiple values that are not logically behind each other
         private static void OutputValues(int[] array, int value1, int value2)
         {
             if (value1 > array.Length || value2 > array.Length || value1 < 0 || value2 < 0) { return; }
@@ -160,20 +163,20 @@ namespace Sortierungsalgorithmen
             Console.Clear();
         }
 
-        // Partreturn of array
+        // Return only parts of an Array
         private static void Variante5()
         {
             int sliceMin;
             int sliceMax;
-            sliceMin = 0; // manual input
-            sliceMax = 2; // manual input
+            sliceMin = 0; // hardcoded value
+            sliceMax = 2; // hardcoded value
             int[] Array;
             Array = CreateArrayLength("Variante5");
             Array = FillArray(Array);
             OutputValues(Array, sliceMin, sliceMax);
         }
 
-        // Swapping Helper Method
+        // Swapping helper method
         private static int[] SwapValues(int[] array, int Value1, int Value2)
         {
             int TempValue = array[Value1];
@@ -199,7 +202,7 @@ namespace Sortierungsalgorithmen
             Console.Clear();
         }
 
-        // Sorting using builin sorting method
+        // Sorting using built-in sorting
         private static void Variante7()
         {
             int[] array = CreateArrayLength("Variante7");
@@ -211,7 +214,7 @@ namespace Sortierungsalgorithmen
 
         }
 
-        // BubbleSort Implementation
+        // BubbleSort implementation
         private static void Variante8()
         {
             int[] array = CreateArrayLength("Variante8");
@@ -258,6 +261,7 @@ namespace Sortierungsalgorithmen
             Output(array, true);
         }
 
+        // Add a counter
         private static void Variante10()
         {
             {
@@ -289,6 +293,7 @@ namespace Sortierungsalgorithmen
         }
 
 
+        // Menu to select the different variants
         private static void Menu()
         {
             bool InMenu;
@@ -320,15 +325,15 @@ namespace Sortierungsalgorithmen
                     case "clear":
                         Console.Clear();
                         break;
-                    // exists programm
+                    // Exists programm
                     case "quit":
                         InMenu = false;
                         break;
-                    // exists programm
+                    // Exists programm
                     case "exit":
                         InMenu = false;
                         break;
-                    // prints all available commands to console
+                    // Prints all available commands to console
                     case "help":
                         Console.WriteLine("Available Commands: \n");
                         foreach (string command in commands) { Console.WriteLine(command); }
@@ -371,14 +376,14 @@ namespace Sortierungsalgorithmen
                         Variante9();
                         break;
 
-                    // Displays about message
+                    // Displays "About-Message"
                     case "about":
                         Console.WriteLine(welcomemessage);
                         break;
                     case "":
                         break;
 
-                    // lists all available variants
+                    // Lists all available variants
                     case "display":
                         Console.WriteLine("Available Variants and its description\n");
                         for (int Description = 0; Description < Variants.Length; Description++)
@@ -388,7 +393,7 @@ namespace Sortierungsalgorithmen
                         Console.WriteLine("\n");
                         break;
 
-                    // Fallback, if no match
+                    // Fallback if no match
                     default:
                         Console.WriteLine($"{cmd}: Command not found");
                         break;
@@ -398,6 +403,7 @@ namespace Sortierungsalgorithmen
 
         }
 
+        // Main Method
         static void Main(string[] args)
         {
             // Launch Main Menu
